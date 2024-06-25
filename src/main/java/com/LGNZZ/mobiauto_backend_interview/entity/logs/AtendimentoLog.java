@@ -1,9 +1,8 @@
-package com.LGNZZ.mobiauto_backend_interview.entities.logs;
+package com.LGNZZ.mobiauto_backend_interview.entity.logs;
 
 
-import com.LGNZZ.mobiauto_backend_interview.entities.Atendimento;
-import com.LGNZZ.mobiauto_backend_interview.entities.Enums.SituacaoOportunidadeEnum;
-import com.LGNZZ.mobiauto_backend_interview.entities.Enums.TipoAcaoEnum;
+import com.LGNZZ.mobiauto_backend_interview.entity.Atendimento;
+import com.LGNZZ.mobiauto_backend_interview.entity.Enums.TipoAcaoEnum;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -17,7 +16,7 @@ public class AtendimentoLog {
     @Column(name = "ID_ATENDIMENTO_LOG")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_ATENDIMENTO", foreignKey = @ForeignKey(name = "ATEND_ATENDLOG_FK"), nullable = false)
     private Atendimento atendimento;
 

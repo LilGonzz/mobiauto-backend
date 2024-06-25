@@ -1,17 +1,19 @@
-package com.LGNZZ.mobiauto_backend_interview.entities;
+package com.LGNZZ.mobiauto_backend_interview.entity;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "REVENDA")
-public class Revenda {
+@Table(name = "REVENDA", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "cnpj")
+})
+public class Revenda extends BaseClass {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_REVENDA")
     private Long id;
 
-    @Column(name = "DS_CNPJ", nullable = false, length = 14)
+    @Column(name = "DS_CNPJ", nullable = false, length = 14, unique = true)
     private String cnpj;
 
     @Column(name = "DS_NOME_SOCIAL", nullable = false)

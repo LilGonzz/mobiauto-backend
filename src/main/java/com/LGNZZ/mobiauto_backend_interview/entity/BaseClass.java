@@ -1,4 +1,4 @@
-package com.LGNZZ.mobiauto_backend_interview.entities;
+package com.LGNZZ.mobiauto_backend_interview.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;

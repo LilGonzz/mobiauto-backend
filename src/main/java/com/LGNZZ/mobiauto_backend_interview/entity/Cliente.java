@@ -1,14 +1,14 @@
-package com.LGNZZ.mobiauto_backend_interview.entities;
+package com.LGNZZ.mobiauto_backend_interview.entity;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "USUARIO")
-public class User extends BaseClass{
+@Table(name = "CLIENTE")
+public class Cliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_USUARIO")
+    @Column(name = "ID_CLIENTE")
     private Long id;
 
     @Column(name = "DS_NOME", nullable = false)
@@ -17,8 +17,8 @@ public class User extends BaseClass{
     @Column(name = "DS_EMAIL", nullable = false)
     private String email;
 
-    @Column(name = "DS_SENHA", nullable = false)
-    private String senha;
+    @Column(name = "DS_TELEFONE", nullable = false)
+    private String telefone;
 
     public Long getId() {
         return id;
@@ -44,11 +44,11 @@ public class User extends BaseClass{
         this.email = email;
     }
 
-    public String getSenha() {
-        return senha;
+    public String getTelefone() {
+        return telefone;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 }

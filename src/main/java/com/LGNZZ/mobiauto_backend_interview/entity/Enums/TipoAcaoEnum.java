@@ -1,4 +1,4 @@
-package com.LGNZZ.mobiauto_backend_interview.entities.Enums;
+package com.LGNZZ.mobiauto_backend_interview.entity.Enums;
 
 public enum TipoAcaoEnum implements EnumLabel{
     NOVA_ATRIBUICAO("Nova atribuição ao atendimento"),

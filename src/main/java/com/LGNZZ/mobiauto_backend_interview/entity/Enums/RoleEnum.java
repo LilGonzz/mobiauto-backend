@@ -1,6 +1,4 @@
-package com.LGNZZ.mobiauto_backend_interview.entities.Enums;
-
-import java.io.Serializable;
+package com.LGNZZ.mobiauto_backend_interview.entity.Enums;
 
 public enum RoleEnum implements EnumLabel{
     ADMINISTRADOR("Usuario Administrador"),

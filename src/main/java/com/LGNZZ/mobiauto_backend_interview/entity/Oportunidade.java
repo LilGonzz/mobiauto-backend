@@ -1,6 +1,6 @@
-package com.LGNZZ.mobiauto_backend_interview.entities;
+package com.LGNZZ.mobiauto_backend_interview.entity;
 
-import com.LGNZZ.mobiauto_backend_interview.entities.Enums.SituacaoOportunidadeEnum;
+import com.LGNZZ.mobiauto_backend_interview.entity.Enums.SituacaoOportunidadeEnum;
 import jakarta.persistence.*;
 
 @Entity
@@ -23,11 +23,11 @@ public class Oportunidade extends BaseClass{
     @JoinColumn(name = "ID_REVENDA", foreignKey = @ForeignKey(name = "REV_OP_FK"), nullable = false)
     private Revenda revenda;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_CLIENTE", foreignKey = @ForeignKey(name = "CLI_OP_FK"), nullable = false)
     private Cliente cliente;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_VEICULO", foreignKey = @ForeignKey(name = "VEI_OP_FK"), nullable = false)
     private Veiculo veiculo;
 

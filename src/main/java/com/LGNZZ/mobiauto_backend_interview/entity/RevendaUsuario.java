@@ -1,6 +1,6 @@
-package com.LGNZZ.mobiauto_backend_interview.entities;
+package com.LGNZZ.mobiauto_backend_interview.entity;
 
-import com.LGNZZ.mobiauto_backend_interview.entities.Enums.RoleEnum;
+import com.LGNZZ.mobiauto_backend_interview.entity.Enums.RoleEnum;
 import jakarta.persistence.*;
 
 @Entity
@@ -14,14 +14,14 @@ public class RevendaUsuario extends BaseClass{
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_USUARIO", foreignKey = @ForeignKey(name = "USER_REVUS_FK"))
-    private User user;
+    private Usuario usuario;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_REVENDA", foreignKey = @ForeignKey(name = "REV_REVUS_FK"))
     private Revenda revenda;
 
     @Enumerated(EnumType.STRING)
-    private RoleEnum name;
+    private RoleEnum role;
 
     public Long getId() {
         return id;
@@ -31,12 +31,12 @@ public class RevendaUsuario extends BaseClass{
         this.id = id;
     }
 
-    public User getUsuario() {
-        return user;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setUsuario(User user) {
-        this.user = user;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public Revenda getRevenda() {
@@ -47,11 +47,11 @@ public class RevendaUsuario extends BaseClass{
         this.revenda = revenda;
     }
 
-    public RoleEnum getName() {
-        return name;
+    public RoleEnum getRole() {
+        return role;
     }
 
-    public void setName(RoleEnum name) {
-        this.name = name;
+    public void setRole(RoleEnum name) {
+        this.role = name;
     }
 }
