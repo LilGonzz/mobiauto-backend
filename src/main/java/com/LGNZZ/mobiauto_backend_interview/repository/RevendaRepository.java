@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface RevendaRepository extends JpaRepository<Revenda, Long> {
 
-    List<Revenda> findAllRevendas();
+    List<Revenda> findAll();
 
     @Query("SELECT rev FROM Revenda rev WHERE rev.isActive = true")
     List<Revenda> findAllRevendasAtivas();

@@ -1,13 +1,12 @@
 package com.LGNZZ.mobiauto_backend_interview.entity;
 
 import jakarta.persistence.*;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Set;
 
 @Entity
-@Table(name = "USUARIO", uniqueConstraints = {
-        @UniqueConstraint(columnNames = "email")
-})
+@Table(name = "USUARIO", uniqueConstraints={@UniqueConstraint(columnNames={"DS_EMAIL"})})
 public class Usuario extends BaseClass{
 
     @Id
@@ -24,8 +23,16 @@ public class Usuario extends BaseClass{
     @Column(name = "DS_SENHA", nullable = false)
     private String senha;
 
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<RevendaUsuario> rolesPorRevenda;
+
+    public Usuario() {}
+    public Usuario(String name, String email, String senha) {
+        super();
+        this.name = name;
+        this.email = email;
+        this.senha = senha;
+    }
 
     public Long getId() {
         return id;
@@ -65,5 +72,9 @@ public class Usuario extends BaseClass{
 
     public void setRolesPorRevenda(Set<RevendaUsuario> rolesPorRevenda) {
         this.rolesPorRevenda = rolesPorRevenda;
+    }
+
+    public Boolean confereLogin(String senha, PasswordEncoder passwordEncoder){
+        return passwordEncoder.matches(senha, this.senha);
     }
 }

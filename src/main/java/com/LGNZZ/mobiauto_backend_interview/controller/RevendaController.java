@@ -23,14 +23,14 @@ public class RevendaController {
     private RevendaMapper revendaMapper;
 
     @GetMapping
-    public ResponseEntity<List<RevendaApi>> findAll() {
+    public ResponseEntity<List<RevendaApi>> obterTodasRevendas() {
         List<Revenda> revendas = revendaService.findAll();
         List<RevendaApi> revendaApis = revendas.stream().map(revenda -> revendaMapper.revendaToApi(revenda)).toList();
         return ResponseEntity.ok(revendaApis);
     }
 
     @GetMapping("/{idRevenda}")
-    public ResponseEntity<RevendaApi> findById(@PathVariable("idRevenda") Long idRevenda) {
+    public ResponseEntity<RevendaApi> obterRevendaPorId(@PathVariable("idRevenda") Long idRevenda) {
         Revenda revenda = revendaService.findById(idRevenda);
         RevendaApi revendaApi = revendaMapper.revendaToApi(revenda);
         return ResponseEntity.ok(revendaApi);

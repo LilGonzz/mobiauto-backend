@@ -22,6 +22,13 @@ public class Veiculo {
 
     @Column(name = "DS_ANO_MODELO", nullable = false)
     private String anoModelo;
+    public Veiculo() {}
+    public Veiculo(String marca, String versao, String modelo, String anoModelo) {
+        this.marca = marca;
+        this.versao = versao;
+        this.modelo = modelo;
+        this.anoModelo = anoModelo;
+    }
 
     public Long getId() {
         return id;

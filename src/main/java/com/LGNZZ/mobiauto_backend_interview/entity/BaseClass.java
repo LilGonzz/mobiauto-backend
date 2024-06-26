@@ -13,6 +13,10 @@ public abstract class BaseClass {
     @Column(name = "is_active", nullable = false)
     private Boolean isActive;
 
+    public BaseClass() {
+        createdAt = LocalDateTime.now();
+        isActive = true;
+    }
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }

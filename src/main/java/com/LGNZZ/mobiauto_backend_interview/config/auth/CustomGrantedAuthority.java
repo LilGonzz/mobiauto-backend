@@ -14,6 +14,9 @@ public class CustomGrantedAuthority implements GrantedAuthority {
 
     @Override
     public String getAuthority() {
-        return role + "_" + revendaId;
+        if(!role.equals(RoleEnum.ADMINISTRADOR))
+            return role + "_ROLE_" + revendaId;
+
+        return role + "_ROLE_";
     }
 }

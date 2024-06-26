@@ -12,7 +12,7 @@ public class RevendaUsuario extends BaseClass{
     @Column(name = "ID_REVENDA_USUARIO")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ID_USUARIO", foreignKey = @ForeignKey(name = "USER_REVUS_FK"))
     private Usuario usuario;
 
@@ -22,6 +22,17 @@ public class RevendaUsuario extends BaseClass{
 
     @Enumerated(EnumType.STRING)
     private RoleEnum role;
+
+    @Column(name = "is_active")
+    private Boolean isActive;
+
+    public RevendaUsuario() {}
+    public RevendaUsuario(Usuario usuario, Revenda revenda, RoleEnum role) {
+        this.usuario = usuario;
+        this.revenda = revenda;
+        this.role = role;
+        this.isActive = true;
+    }
 
     public Long getId() {
         return id;

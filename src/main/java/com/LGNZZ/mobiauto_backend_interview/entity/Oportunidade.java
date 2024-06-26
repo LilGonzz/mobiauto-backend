@@ -23,13 +23,22 @@ public class Oportunidade extends BaseClass{
     @JoinColumn(name = "ID_REVENDA", foreignKey = @ForeignKey(name = "REV_OP_FK"), nullable = false)
     private Revenda revenda;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_CLIENTE", foreignKey = @ForeignKey(name = "CLI_OP_FK"), nullable = false)
     private Cliente cliente;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_VEICULO", foreignKey = @ForeignKey(name = "VEI_OP_FK"), nullable = false)
     private Veiculo veiculo;
+
+    public Oportunidade() {}
+    public Oportunidade(Revenda revenda, Cliente cliente, Veiculo veiculo) {
+        super();
+        this.situacao = SituacaoOportunidadeEnum.NOVO;
+        this.revenda = revenda;
+        this.cliente = cliente;
+        this.veiculo = veiculo;
+    }
 
     public Long getId() {
         return id;
