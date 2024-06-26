@@ -12,7 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Service
 public class RevendaUsuarioService {
@@ -23,7 +23,7 @@ public class RevendaUsuarioService {
     private RevendaService revendaService;
 
     public void associaUsuarioRevenda(Usuario usuario, Long idRevenda, RoleEnum role) {
-        Revenda revenda = revendaService.findById(idRevenda);
+        Revenda revenda = revendaService.obterPorId(idRevenda);
         List<RevendaUsuario> revendaUser = revendaUsuarioRepository.findAllByRevenda(revenda);
 
         revendaUser.stream()
@@ -42,8 +42,13 @@ public class RevendaUsuarioService {
         return revendaUsuarioRepository.findAllByUsuario(usuario);
     }
 
+    public List<RevendaUsuario> obterRevendasUsuarioPorRevendaId(Long idRevenda){
+        return revendaUsuarioRepository.findAllByRevendaId(idRevenda);
+    }
+
+
     public void alteraRoleUsuarioRevenda(Usuario usuario, Long idRevenda, RoleEnum role){
-        Revenda revenda = revendaService.findById(idRevenda);
+        Revenda revenda = revendaService.obterPorId(idRevenda);
         RevendaUsuario revendaUser = revendaUsuarioRepository.findByRevendaAndUsuario(revenda, usuario);
         revendaUser.setRole(role);
         revendaUsuarioRepository.save(revendaUser);
@@ -53,7 +58,7 @@ public class RevendaUsuarioService {
         if(idRevenda == 0)
             return softDeleteRevendaUsuarioPorUsuario(usuario);
 
-        Revenda revenda = revendaService.findById(idRevenda);
+        Revenda revenda = revendaService.obterPorId(idRevenda);
         RevendaUsuario revendaUsuario = revendaUsuarioRepository.findByRevendaAndUsuario(revenda, usuario);
         revendaUsuario.setActive(false);
         revendaUsuario.setUpdatedAt(LocalDateTime.now());
@@ -69,9 +74,14 @@ public class RevendaUsuarioService {
             return;
         }
 
-        Revenda revenda = revendaService.findById(idRevenda);
+        Revenda revenda = revendaService.obterPorId(idRevenda);
         RevendaUsuario revendaUsuario = revendaUsuarioRepository.findByRevendaAndUsuario(revenda, usuario);
         revendaUsuarioRepository.delete(revendaUsuario);
+    }
+
+    public RevendaUsuario checkUsuarioRequisitos(Long idUsuario, Long idRevenda){
+        Optional<RevendaUsuario> revUser = revendaUsuarioRepository.findRevendaUsuarioByIdUsuarioAndIdRevendaAndRole(idUsuario, idRevenda, RoleEnum.ASSISTENTE.name());
+        return revUser.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     private List<RevendaUsuario> softDeleteRevendaUsuarioPorUsuario(Usuario usuario){

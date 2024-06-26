@@ -27,6 +27,12 @@ public class AtendimentoLog {
     @Column(name = "DT_ACAO", nullable = false)
     private LocalDateTime dataAcao;
 
+    public AtendimentoLog() {}
+    public AtendimentoLog(Atendimento atendimento, TipoAcaoEnum tipoAcao) {
+        this.atendimento = atendimento;
+        this.tipoAcao = tipoAcao;
+        this.dataAcao = LocalDateTime.now();
+    }
     public Long getId() {
         return id;
     }

@@ -35,7 +35,7 @@ public class OportunidadeService {
     }
     @Transactional
     public Oportunidade criaNovaOportunidade(Long idRevenda, OportunidadeRequestApi api){
-        Revenda revenda = revendaService.findById(idRevenda);
+        Revenda revenda = revendaService.obterPorId(idRevenda);
         Cliente cliente = new Cliente(api.dadosCliente().nome(), api.dadosCliente().email(), api.dadosCliente().telefone());
         Veiculo veiculo = new Veiculo(api.dadosVeiculo().marca(), api.dadosVeiculo().versao(), api.dadosVeiculo().modelo(), api.dadosVeiculo().anoModelo());
         Oportunidade oportunidade = new Oportunidade(revenda, cliente, veiculo);

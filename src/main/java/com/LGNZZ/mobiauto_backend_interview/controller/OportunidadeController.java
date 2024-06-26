@@ -73,5 +73,4 @@ public class OportunidadeController {
         return ResponseEntity.noContent().build();
     }
 
-
 }

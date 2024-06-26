@@ -18,7 +18,7 @@ public class RevendaService {
         return revendaRepository.findAll();
     }
 
-    public Revenda findById(Long id) {
+    public Revenda obterPorId(Long id) {
         return revendaRepository.findById(id).orElseThrow(() -> new NotFoundException("Revenda com id: "+ id +" nao encontrada"));
     }
 

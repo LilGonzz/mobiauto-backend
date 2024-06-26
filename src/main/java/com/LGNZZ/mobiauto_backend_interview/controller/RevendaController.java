@@ -31,7 +31,7 @@ public class RevendaController {
 
     @GetMapping("/{idRevenda}")
     public ResponseEntity<RevendaApi> obterRevendaPorId(@PathVariable("idRevenda") Long idRevenda) {
-        Revenda revenda = revendaService.findById(idRevenda);
+        Revenda revenda = revendaService.obterPorId(idRevenda);
         RevendaApi revendaApi = revendaMapper.revendaToApi(revenda);
         return ResponseEntity.ok(revendaApi);
     }

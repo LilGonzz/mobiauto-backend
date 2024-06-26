@@ -1,6 +1,10 @@
 package com.LGNZZ.mobiauto_backend_interview.entity;
 
+import com.LGNZZ.mobiauto_backend_interview.entity.logs.AtendimentoLog;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "ATENDIMENTO")
@@ -11,14 +15,34 @@ public class Atendimento extends BaseClass{
     @Column(name = "ID_ATENDIMENTO")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "ID_OPORTUNIDADE", foreignKey = @ForeignKey(name = "OP_ATEND_FK"), nullable = false)
     private Oportunidade oportunidade;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID_REVENDA_USUARIO", foreignKey = @ForeignKey(name = "REVUSER_ATEND_FK"), nullable = false)
-    private RevendaUsuario revendaUsuario;
+    @ManyToOne
+    @JoinColumn(name = "ID_REVENDA", foreignKey = @ForeignKey(name = "REV_ATEND_FK"), nullable = false)
+    private Revenda revenda;
 
+    @ManyToOne
+    @JoinColumn(name = "ID_USUARIO", foreignKey = @ForeignKey(name = "USER_ATEND_FK"), nullable = false)
+    private Usuario usuario;
+
+    @OneToMany(mappedBy = "atendimento", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<AtendimentoLog> logs;
+
+    public Atendimento() {}
+
+    public Atendimento(Oportunidade oportunidade, Revenda revenda, Usuario usuario) {
+        super();
+        this.oportunidade = oportunidade;
+        this.revenda = revenda;
+        this.usuario = usuario;
+        logs = new ArrayList<>();
+    }
+
+    public void addLog(AtendimentoLog log) {
+        logs.add(log);
+    }
 
     public Long getId() {
         return id;
@@ -36,11 +60,27 @@ public class Atendimento extends BaseClass{
         this.oportunidade = oportunidade;
     }
 
-    public RevendaUsuario getRevendaUsuario() {
-        return revendaUsuario;
+    public List<AtendimentoLog> getLogs() {
+        return logs;
     }
 
-    public void setRevendaUsuario(RevendaUsuario revendaUsuario) {
-        this.revendaUsuario = revendaUsuario;
+    public void setLogs(List<AtendimentoLog> logs) {
+        this.logs = logs;
+    }
+
+    public Revenda getRevenda() {
+        return revenda;
+    }
+
+    public void setRevenda(Revenda revenda) {
+        this.revenda = revenda;
+    }
+
+    public com.LGNZZ.mobiauto_backend_interview.entity.Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(com.LGNZZ.mobiauto_backend_interview.entity.Usuario usuario) {
+        usuario = usuario;
     }
 }

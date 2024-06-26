@@ -1,5 +1,6 @@
 package com.LGNZZ.mobiauto_backend_interview.config;
 
+import com.LGNZZ.mobiauto_backend_interview.entity.Usuario;
 import com.nimbusds.jwt.JWT;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -29,5 +30,10 @@ public class SecurityService {
             }
         }
         return false;
+    }
+
+    public Usuario getUsuarioLogado(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return null;
     }
 }
