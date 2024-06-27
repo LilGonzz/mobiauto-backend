@@ -23,10 +23,10 @@ o wsl será necessário para a geração de chaves privada e pública utilizada 
 2.1 Gerar chaves de autenticação :
 na pasta raiz do projeto, é preciso inserir no terminal
 
-sudo apt-get install openssl
-cd ./src/main/resources
-openssl genrsa > app.key
-openssl rsa -in app.key -pubout -out app.pub
+sudo apt-get install openssl__
+cd ./src/main/resources__
+openssl genrsa > app.key__
+openssl rsa -in app.key -pubout -out app.pub__
 
 2.2 Subir docker-compose
 com o docker instalado, podemos simplesmente inserir no terminal dentro pasta principal do projeto
