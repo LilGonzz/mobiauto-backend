@@ -35,7 +35,9 @@ public class AtendimentoService {
     public Atendimento obterAtendimentosPorId(Long idAtendimento){
         return atendimentoRepository.findById(idAtendimento).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
-
+    public void salvarAtendimento(Atendimento atendimento){
+        atendimentoRepository.save(atendimento);
+    }
     public Atendimento criaNovoAtendimento(Long idRevenda, AtendimentoRequestApi api){
         Oportunidade oportunidade = oportunidadeService.obterOportunidadePorId(api.idOportunidade());
         Revenda revenda = revendaService.obterPorId(idRevenda);
@@ -65,5 +67,11 @@ public class AtendimentoService {
         atendimento.addLog(atendimentoLog);
 
         return atendimentoRepository.save(atendimento);
+    }
+    public List<Atendimento> obterQuantidadeAtendimentoPorUsuario(Usuario usuario, Revenda revenda){
+        return atendimentoRepository.obterQuantidadeAtendimentoPorUsuarioAndRevenda(usuario.getId(), revenda.getId());
+    }
+    public List<Atendimento> obterAtendimentosSemResponsavel(){
+        return atendimentoRepository.obterAtendimentosSemResponsavel();
     }
 }

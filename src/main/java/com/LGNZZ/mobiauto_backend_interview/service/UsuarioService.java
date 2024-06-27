@@ -1,6 +1,7 @@
 package com.LGNZZ.mobiauto_backend_interview.service;
 
 import com.LGNZZ.mobiauto_backend_interview.api.dto.usuario.CriacaoAlteracaoUsuarioApi;
+import com.LGNZZ.mobiauto_backend_interview.entity.Revenda;
 import com.LGNZZ.mobiauto_backend_interview.entity.RevendaUsuario;
 import com.LGNZZ.mobiauto_backend_interview.entity.Usuario;
 import com.LGNZZ.mobiauto_backend_interview.repository.UsuarioRepository;
@@ -39,12 +40,16 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
     public Usuario checkUsuarioEmail(String email){
-        Optional<Usuario> usuarioOpt =  this.getUsuarioByEmail(email);
+        Optional<Usuario> usuarioOpt = this.getUsuarioByEmail(email);
         if (usuarioOpt.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY);
         }
 
         return usuarioOpt.get();
+    }
+
+    public List<Usuario> obterUsuarioPorRevenda(Revenda revenda) {
+        return usuarioRepository.obterUsuarioPorRevenda(revenda.getId());
     }
     public Usuario checkUsuarioId(Long id){
         Optional<Usuario> usuarioOpt = usuarioRepository.findById(id);

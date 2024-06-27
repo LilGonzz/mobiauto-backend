@@ -1,13 +1,11 @@
-# the base image
-FROM amazoncorretto:17
+FROM alpine:latest
 
-# the JAR file path
-ARG JAR_FILE=target/*.jar
+RUN apk --no-cache add openssl
 
-# Copy the JAR file from the build context into the Docker image
-COPY ${JAR_FILE} application.jar
+COPY scripts/gerar-chaves.sh src/main/resources/gerar-chaves.sh
 
-CMD apt-get update -y
+WORKDIR /scripts
 
-# Set the default command to run the Java application
-ENTRYPOINT ["java", "-Xmx2048M", "-jar", "/application.jar"]
+RUN chmod +x gerar-chaves.sh
+
+ENTRYPOINT ["sh", "gerar-chaves.sh"]

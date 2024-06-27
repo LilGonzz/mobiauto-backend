@@ -28,11 +28,11 @@ public class ComandLineRunnerConf implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Revenda revenda1 = new Revenda("1111111111111", "nome social 1");
-        Revenda revenda2 = new Revenda("222222222222", "nome social 2");
+        Revenda revenda1 = new Revenda("58.788.789/0001-77", "nome social 1");
+        Revenda revenda2 = new Revenda("56.525.651/0001-50", "nome social 2");
 
-        Usuario usuario1 = new Usuario("nome 1", "emailuser1@gmail.com", passwordEncoder.encode("432"));
-        Usuario usuario2 = new Usuario("nome 2", "emailuser2@gmail.com", passwordEncoder.encode("234"));
+        Usuario usuario1 = new Usuario("nome 1", "emailuser1@gmail.com", passwordEncoder.encode("1098"));
+        Usuario usuario2 = new Usuario("nome 2", "emailuser2@gmail.com", passwordEncoder.encode("1098"));
 
         RevendaUsuario revendaUsuario1 = new RevendaUsuario(usuario1, null, RoleEnum.ADMINISTRADOR);
         RevendaUsuario revendaUsuario2 = new RevendaUsuario(usuario1, revenda1, RoleEnum.PROPRIETARIO);

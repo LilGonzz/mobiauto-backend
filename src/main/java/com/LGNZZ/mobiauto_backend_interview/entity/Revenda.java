@@ -2,7 +2,9 @@ package com.LGNZZ.mobiauto_backend_interview.entity;
 
 import jakarta.persistence.*;
 
-import java.util.Set;
+import java.util.List;
+import java.util.Objects;
+
 
 @Entity
 @Table(name = "REVENDA", uniqueConstraints={@UniqueConstraint(columnNames={"DS_CNPJ"})})
@@ -13,14 +15,14 @@ public class Revenda extends BaseClass {
     @Column(name = "ID_REVENDA")
     private Long id;
 
-    @Column(name = "DS_CNPJ", nullable = false, length = 14, unique = true)
+    @Column(name = "DS_CNPJ", nullable = false, length = 20, unique = true)
     private String cnpj;
 
     @Column(name = "DS_NOME_SOCIAL", nullable = false)
     private String nomeSocial;
 
     @OneToMany(mappedBy = "revenda", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<RevendaUsuario> revendaUsuarios;
+    private List<RevendaUsuario> revendaUsuarios;
 
     public Revenda(){}
     public Revenda(String cnpj, String nomeSocial) {
@@ -28,6 +30,20 @@ public class Revenda extends BaseClass {
         this.cnpj = cnpj;
         this.nomeSocial = nomeSocial;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Revenda revenda = (Revenda) o;
+        return Objects.equals(id, revenda.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
+
     public Long getId() {
         return id;
     }
@@ -52,11 +68,11 @@ public class Revenda extends BaseClass {
         this.nomeSocial = nomeSocial;
     }
 
-    public Set<RevendaUsuario> getRevendaUsuarios() {
+    public List<RevendaUsuario> getRevendaUsuarios() {
         return revendaUsuarios;
     }
 
-    public void setRevendaUsuarios(Set<RevendaUsuario> revendaUsuarios) {
+    public void setRevendaUsuarios(List<RevendaUsuario> revendaUsuarios) {
         this.revendaUsuarios = revendaUsuarios;
     }
 }

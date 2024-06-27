@@ -13,6 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class RevendaUsuarioService {
@@ -24,7 +25,7 @@ public class RevendaUsuarioService {
 
     public void associaUsuarioRevenda(Usuario usuario, Long idRevenda, RoleEnum role) {
         Revenda revenda = revendaService.obterPorId(idRevenda);
-        List<RevendaUsuario> revendaUser = revendaUsuarioRepository.findAllByRevenda(revenda);
+        Set<RevendaUsuario> revendaUser = revendaUsuarioRepository.findAllByRevenda(revenda);
 
         revendaUser.stream()
                 .filter(revUser ->
@@ -67,7 +68,6 @@ public class RevendaUsuarioService {
         return List.of(revendaUsuario);
 
     }
-
     public void deleteRevendaUsuario(Usuario usuario, Long idRevenda){
         if(idRevenda == 0) {
             revendaUsuarioRepository.deleteAllByUsuario(usuario);

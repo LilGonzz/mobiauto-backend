@@ -60,8 +60,8 @@ public class OportunidadeController {
     }
 
     @PreAuthorize("@securityService.hasPermission('ROLE_ADMINISTRADOR','ROLE_PROPRIETARIO_' + #idRevenda, 'ROLE_GERENTE_' + #idRevenda, 'ROLE_ASSISTENTE_' + #idRevenda)")
-    @PutMapping
-    public ResponseEntity<String> alterarOportunidade(@RequestBody AlteracaoOportunidadeApi api){
+    @PutMapping("/{idRevenda}")
+    public ResponseEntity<String> alterarOportunidade(@RequestBody AlteracaoOportunidadeApi api, @PathVariable(name = "idRevenda") Long idRevenda){
         oportunidadeService.alteraOportunidade(api);
         return ResponseEntity.ok("Oportunidade alterado com sucesso!");
     }

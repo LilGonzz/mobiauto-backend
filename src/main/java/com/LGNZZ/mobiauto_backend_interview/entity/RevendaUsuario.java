@@ -3,6 +3,8 @@ package com.LGNZZ.mobiauto_backend_interview.entity;
 import com.LGNZZ.mobiauto_backend_interview.entity.Enums.RoleEnum;
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "REVENDA_USUARIO")
 public class RevendaUsuario extends BaseClass{
@@ -32,6 +34,19 @@ public class RevendaUsuario extends BaseClass{
         this.revenda = revenda;
         this.role = role;
         this.isActive = true;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RevendaUsuario that = (RevendaUsuario) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 
     public Long getId() {

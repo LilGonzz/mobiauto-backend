@@ -3,6 +3,7 @@ package com.LGNZZ.mobiauto_backend_interview.entity;
 import jakarta.persistence.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -32,6 +33,19 @@ public class Usuario extends BaseClass{
         this.name = name;
         this.email = email;
         this.senha = senha;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Usuario usuario = (Usuario) o;
+        return Objects.equals(id, usuario.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 
     public Long getId() {

@@ -13,4 +13,9 @@ public interface AtendimentoRepository extends JpaRepository<Atendimento, Long> 
 
     @Query("SELECT at FROM Atendimento at WHERE at.oportunidade = :idOportunidade")
     Optional<List<Atendimento>> findAllByIdOportunidade(Long idOportunidade);
+
+    @Query("SELECT at FROM Atendimento at WHERE at.usuario IS NULL")
+    List<Atendimento> obterAtendimentosSemResponsavel();
+    @Query("SELECT at FROM Atendimento at WHERE at.usuario = :idUsuario AND at.revenda = :idRevenda")
+    List<Atendimento> obterQuantidadeAtendimentoPorUsuarioAndRevenda(Long idUsuario, Long idRevenda);
 }

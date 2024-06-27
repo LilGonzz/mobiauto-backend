@@ -1,6 +1,6 @@
 package com.LGNZZ.mobiauto_backend_interview.config;
 
-import com.LGNZZ.mobiauto_backend_interview.config.auth.CustomUserDetailsService;
+
 import com.nimbusds.jose.jwk.JWK;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
@@ -34,10 +34,6 @@ import java.security.interfaces.RSAPublicKey;
 @ComponentScan(basePackages = "com.LGNZZ.mobiauto_backend_interview.service")
 public class SecurityConfiguration {
 
-    @Autowired
-    private CustomUserDetailsService customUserDetailsService;
-
-
     @Value("${jwt.public.key}")
     private RSAPublicKey publicKey;
     @Value("${jwt.private.key}")
@@ -59,12 +55,11 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.POST,"api/v1/users/login").permitAll()
+                        .requestMatchers(HttpMethod.POST,"api/v1/login").permitAll()
                         .requestMatchers(AUTH_WHITELIST).permitAll()
                         .anyRequest().authenticated()
                 ).oauth2ResourceServer(auth -> auth.jwt(Customizer.withDefaults()))
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .userDetailsService(customUserDetailsService);
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         return http.build();
     }

@@ -37,7 +37,7 @@ public class AtendimentoController {
 
     @PreAuthorize("@securityService.hasPermission('ROLE_ADMINISTRADOR','ROLE_PROPRIETARIO_' + #idRevenda, 'ROLE_GERENTE_' + #idRevenda, 'ROLE_ASSISTENTE_' + #idRevenda)")
     @GetMapping("/{idOportunidade}")
-    public ResponseEntity<List<AtendimentoApi>> obterTodasAtendimentosPorOportunidade(@PathVariable Long idOportunidade) {
+    public ResponseEntity<List<AtendimentoApi>> obterTodasAtendimentosPorOportunidade(@PathVariable Long idOportunidade, @PathVariable(name = "idRevenda") Long idRevenda) {
         List<Atendimento> Atendimentos = atendimentoService.obterAtendimentosPorOportunidade(idOportunidade);
         List<AtendimentoApi> api = Atendimentos.stream().map(op -> AtendimentoMapper.toAtendimentoApi(op)).toList();
 
@@ -46,7 +46,7 @@ public class AtendimentoController {
 
     @PreAuthorize("@securityService.hasPermission('ROLE_ADMINISTRADOR','ROLE_PROPRIETARIO_' + #idRevenda, 'ROLE_GERENTE_' + #idRevenda, 'ROLE_ASSISTENTE_' + #idRevenda)")
     @GetMapping("/{idAtendimento}")
-    public ResponseEntity<AtendimentoApi> obterAtendimentoPorId(@PathVariable(name = "idAtendimento") Long idAtendimento) {
+    public ResponseEntity<AtendimentoApi> obterAtendimentoPorId(@PathVariable(name = "idAtendimento") Long idAtendimento, @PathVariable(name = "idRevenda") Long idRevenda) {
         Atendimento Atendimento = atendimentoService.obterAtendimentosPorId(idAtendimento);
         AtendimentoApi api = AtendimentoMapper.toAtendimentoApi(Atendimento);
 

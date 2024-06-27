@@ -10,12 +10,13 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Repository
 public interface RevendaUsuarioRepository extends JpaRepository<RevendaUsuario, Long> {
 
     List<RevendaUsuario> findAllByUsuario(Usuario usuario);
-    List<RevendaUsuario> findAllByRevenda(Revenda revenda);
+    Set<RevendaUsuario> findAllByRevenda(Revenda revenda);
     RevendaUsuario findByRevendaAndUsuario(Revenda revenda, Usuario usuario);
     void deleteAllByUsuario(Usuario usuario);
 
@@ -27,4 +28,5 @@ public interface RevendaUsuarioRepository extends JpaRepository<RevendaUsuario, 
             "AND revUser.revenda.id = :idRevenda " +
             "AND revUser.role = :role")
     Optional<RevendaUsuario> findRevendaUsuarioByIdUsuarioAndIdRevendaAndRole(Long idUsuario, Long idRevenda, String role);
+
 }
